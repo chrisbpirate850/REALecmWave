@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/migrate-analytics.mjs:*)",
+      "Bash(npm run build:*)",
+      "Bash(git init:*)"
+    ]
+  }
+}
