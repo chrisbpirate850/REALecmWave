@@ -107,9 +107,37 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-        {/* Background decoration */}
+
+        {/* Background decoration - blurred circles */}
         <div className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-emerald-100/50 blur-3xl" />
         <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-emerald-100/50 blur-3xl" />
+
+        {/* Animated flowing wave SVG - positioned at bottom */}
+        <div className="absolute inset-x-0 bottom-0 z-0 overflow-hidden">
+          <svg
+            viewBox="0 0 1440 320"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-[120%] -ml-[10%] h-auto min-w-[800px]"
+            preserveAspectRatio="none"
+          >
+            {/* Back wave - slowest */}
+            <path
+              d="M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,192C672,203,768,181,864,154.7C960,128,1056,96,1152,101.3C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              className="fill-emerald-100/40 animate-wave-slow"
+            />
+            {/* Middle wave - medium speed */}
+            <path
+              d="M0,256L48,245.3C96,235,192,213,288,208C384,203,480,213,576,229.3C672,245,768,267,864,261.3C960,256,1056,224,1152,213.3C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              className="fill-emerald-200/30 animate-wave-medium"
+            />
+            {/* Front wave - fastest */}
+            <path
+              d="M0,288L48,282.7C96,277,192,267,288,272C384,277,480,299,576,293.3C672,288,768,256,864,250.7C960,245,1056,267,1152,272C1248,277,1344,267,1392,261.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              className="fill-white animate-wave-fast"
+            />
+          </svg>
+        </div>
       </section>
 
       {/* THE FORMAT SECTION */}

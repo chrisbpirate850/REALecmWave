@@ -124,3 +124,52 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Animated wave keyframes */
+@keyframes wave-slow {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-25px);
+  }
+}
+
+@keyframes wave-medium {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+
+@keyframes wave-fast {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-15px);
+  }
+}
+
+.animate-wave-slow {
+  animation: wave-slow 8s ease-in-out infinite;
+}
+
+.animate-wave-medium {
+  animation: wave-medium 6s ease-in-out infinite;
+}
+
+.animate-wave-fast {
+  animation: wave-fast 4s ease-in-out infinite;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-wave-slow,
+  .animate-wave-medium,
+  .animate-wave-fast {
+    animation: none;
+  }
+}
