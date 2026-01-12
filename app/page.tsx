@@ -99,9 +99,9 @@ export default async function HomePage() {
                   Claim Your Category
                 </Button>
               </Link>
-              <Link href="#see-it">
+              <Link href="/demo/dashboard">
                 <Button size="lg" variant="outline" className="text-lg">
-                  See the Postcard
+                  See Demo Dashboard
                 </Button>
               </Link>
             </div>
@@ -336,17 +336,24 @@ export default async function HomePage() {
 
           <div className="mt-12 space-y-4">
             {[
-              { icon: Mail, text: "Your ad on 5,000 postcards" },
-              { icon: Lock, text: "Category exclusivity (no competitors on your mailer)" },
-              { icon: QrCode, text: "Unique QR code linked to your landing page" },
-              { icon: BarChart3, text: "Real-time scan tracking dashboard" },
-              { icon: CheckCircle, text: "Proof of delivery" },
+              { icon: Mail, text: "Your ad on 5,000 postcards", link: null },
+              { icon: Lock, text: "Category exclusivity (no competitors on your mailer)", link: null },
+              { icon: QrCode, text: "Unique QR code linked to your landing page", link: "/demo/landing", linkText: "See example" },
+              { icon: BarChart3, text: "Real-time scan tracking dashboard", link: "/demo/dashboard", linkText: "See demo" },
+              { icon: CheckCircle, text: "Proof of delivery", link: null },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-4 rounded-lg border bg-card p-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-100">
                   <item.icon className="h-5 w-5 text-emerald-600" />
                 </div>
-                <p className="font-medium">{item.text}</p>
+                <p className="flex-1 font-medium">{item.text}</p>
+                {item.link && (
+                  <Link href={item.link}>
+                    <Button variant="ghost" size="sm" className="text-emerald-600 hover:text-emerald-700">
+                      {item.linkText} →
+                    </Button>
+                  </Link>
+                )}
               </div>
             ))}
           </div>
