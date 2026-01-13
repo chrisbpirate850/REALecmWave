@@ -46,11 +46,7 @@ interface AdSpot {
   status: string
   price: number
   advertiser_id: string | null
-  artwork_url: string | null
-  profiles?: {
-    business_name: string
-    email: string
-  }
+  ad_copy_url: string | null
 }
 
 interface Mailing {
@@ -101,18 +97,15 @@ export default function EditMailingPage() {
           status,
           price,
           advertiser_id,
-          artwork_url,
-          profiles:advertiser_id (
-            business_name,
-            email
-          )
+          ad_copy_url
         )
       `)
       .eq("id", params.id)
       .single()
 
     if (error) {
-      setError("Failed to load mailing")
+      console.error("Error fetching mailing:", error)
+      setError("Failed to load mailing: " + error.message)
       setLoading(false)
       return
     }
@@ -596,9 +589,9 @@ function SpotCard({ spot }: { spot: AdSpot }) {
     >
       <p className="text-xs font-medium">#{spot.grid_position}</p>
       <p className="text-[10px] text-muted-foreground capitalize">{spot.status}</p>
-      {spot.profiles && (
-        <p className="mt-1 truncate text-[9px] font-medium">
-          {spot.profiles.business_name}
+      {spot.advertiser_id && (
+        <p className="mt-1 truncate text-[9px] font-medium text-emerald-600">
+          Sold
         </p>
       )}
     </div>

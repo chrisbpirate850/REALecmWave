@@ -18,16 +18,8 @@ interface AdSpot {
   status: string
   price: number
   advertiser_id: string | null
-  artwork_url: string | null
-  profiles?: {
-    business_name: string
-    email: string
-    phone?: string
-  }
-  landing_pages?: {
-    slug: string
-    offer_title: string
-  }[]
+  ad_copy_url: string | null
+  landing_page_slug: string | null
 }
 
 interface Mailing {
@@ -67,16 +59,8 @@ export default function ExportMailingPage() {
           status,
           price,
           advertiser_id,
-          artwork_url,
-          profiles:advertiser_id (
-            business_name,
-            email,
-            phone
-          ),
-          landing_pages (
-            slug,
-            offer_title
-          )
+          ad_copy_url,
+          landing_page_slug
         )
       `)
       .eq("id", params.id)
@@ -98,16 +82,16 @@ export default function ExportMailingPage() {
 
     try {
       const zip = new JSZip()
-      const spotsWithArtwork = mailing.ad_spots.filter(s => s.artwork_url)
+      const spotsWithArtwork = mailing.ad_spots.filter(s => s.ad_copy_url)
 
       // Download each artwork file
       for (const spot of spotsWithArtwork) {
-        if (!spot.artwork_url) continue
+        if (!spot.ad_copy_url) continue
 
         try {
-          const response = await fetch(spot.artwork_url)
+          const response = await fetch(spot.ad_copy_url)
           const blob = await response.blob()
-          const extension = spot.artwork_url.split('.').pop()?.split('?')[0] || 'png'
+          const extension = spot.ad_copy_url.split('.').pop()?.split('?')[0] || 'png'
           const filename = `spot_${spot.position}_${spot.side}_${spot.grid_position}.${extension}`
           zip.file(filename, blob)
         } catch (err) {
@@ -166,16 +150,15 @@ export default function ExportMailingPage() {
         }
       }
 
-      if (spot.artwork_url) {
-        const extension = spot.artwork_url.split('.').pop()?.split('?')[0] || 'png'
+      if (spot.ad_copy_url) {
+        const extension = spot.ad_copy_url.split('.').pop()?.split('?')[0] || 'png'
         lines.push(`  Artwork: spot_${spot.position}_${spot.side}_${spot.grid_position}.${extension}`)
       } else {
         lines.push(`  Artwork: NOT UPLOADED`)
       }
 
-      if (spot.landing_pages?.[0]) {
-        lines.push(`  QR Landing: /offers/${spot.landing_pages[0].slug}`)
-        lines.push(`  Offer: ${spot.landing_pages[0].offer_title}`)
+      if (spot.landing_page_slug) {
+        lines.push(`  QR Landing: /offers/${spot.landing_page_slug}`)
       }
 
       lines.push("")
@@ -208,9 +191,9 @@ export default function ExportMailingPage() {
     )
   }
 
-  const spotsWithArtwork = mailing.ad_spots.filter(s => s.artwork_url).length
+  const spotsWithArtwork = mailing.ad_spots.filter(s => s.ad_copy_url).length
   const spotsMissingArtwork = mailing.ad_spots.filter(
-    s => (s.status === "purchased" || s.status === "uploaded") && !s.artwork_url
+    s => (s.status === "purchased" || s.status === "uploaded") && !s.ad_copy_url
   ).length
 
   return (
@@ -327,16 +310,16 @@ export default function ExportMailingPage() {
                         {spot.profiles.business_name} · {spot.profiles.email}
                       </p>
                     )}
-                    {spot.landing_pages?.[0] && (
+                    {spot.landing_page_slug && (
                       <p className="text-xs text-muted-foreground">
-                        QR: /offers/{spot.landing_pages[0].slug}
+                        QR: /offers/{spot.landing_page_slug}
                       </p>
                     )}
                   </div>
                   <div className="flex items-center gap-2">
-                    {spot.artwork_url ? (
+                    {spot.ad_copy_url ? (
                       <a
-                        href={spot.artwork_url}
+                        href={spot.ad_copy_url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-emerald-600 hover:underline"
@@ -359,9 +342,9 @@ export default function ExportMailingPage() {
 function SpotPreview({ spot }: { spot: AdSpot }) {
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-lg border bg-muted">
-      {spot.artwork_url ? (
+      {spot.ad_copy_url ? (
         <img
-          src={spot.artwork_url}
+          src={spot.ad_copy_url}
           alt={`Spot ${spot.position}`}
           className="h-full w-full object-cover"
         />

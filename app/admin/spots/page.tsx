@@ -32,7 +32,7 @@ interface AdSpot {
   status: string
   price: number
   advertiser_id: string | null
-  artwork_url: string | null
+  ad_copy_url: string | null
   purchased_at: string | null
   mailing_id: string
   mailings: {
@@ -159,7 +159,7 @@ export default function AdminSpotsPage() {
       .update({
         status: "available",
         advertiser_id: null,
-        artwork_url: null,
+        ad_copy_url: null,
         purchased_at: null,
       })
       .eq("id", selectedSpot.id)
@@ -303,9 +303,9 @@ export default function AdminSpotsPage() {
                   <div className="flex items-center gap-4">
                     {/* Artwork thumbnail */}
                     <div className="relative h-12 w-16 overflow-hidden rounded border bg-muted">
-                      {spot.artwork_url ? (
+                      {spot.ad_copy_url ? (
                         <img
-                          src={spot.artwork_url}
+                          src={spot.ad_copy_url}
                           alt="Artwork"
                           className="h-full w-full object-cover"
                         />
@@ -357,9 +357,9 @@ export default function AdminSpotsPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        {spot.artwork_url && (
+                        {spot.ad_copy_url && (
                           <DropdownMenuItem
-                            onClick={() => window.open(spot.artwork_url!, "_blank")}
+                            onClick={() => window.open(spot.ad_copy_url!, "_blank")}
                           >
                             <ExternalLink className="mr-2 h-4 w-4" />
                             View Artwork
