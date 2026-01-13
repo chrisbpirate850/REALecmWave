@@ -17,13 +17,15 @@ type SiteHeaderProps = {
   showDashboard?: boolean
   showMailings?: boolean
   showEDDM?: boolean
+  showBlog?: boolean
 }
 
 export function SiteHeader({
   showAuthButtons = true,
   showDashboard = false,
   showMailings = true,
-  showEDDM = true
+  showEDDM = true,
+  showBlog = true
 }: SiteHeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -35,6 +37,10 @@ export function SiteHeader({
 
   if (showEDDM) {
     navLinks.push({ href: "/eddm", label: "EDDM Tools", variant: "ghost" })
+  }
+
+  if (showBlog) {
+    navLinks.push({ href: "/blog", label: "Blog", variant: "ghost" })
   }
 
   if (showDashboard) {
