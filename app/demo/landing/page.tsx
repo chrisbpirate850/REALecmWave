@@ -247,6 +247,17 @@ export default function DemoLandingPage() {
         <div className="container text-center text-sm text-muted-foreground">
           <p>Powered by Emerald Coast Marketing Wave</p>
           <p className="mt-1">Connecting local businesses with the Emerald Coast community</p>
+          <p className="mt-3">
+            A project by{" "}
+            <a
+              href="https://christopherjbradley.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-600 hover:text-emerald-500 hover:underline"
+            >
+              Christopher J. Bradley
+            </a>
+          </p>
         </div>
       </footer>
     </div>

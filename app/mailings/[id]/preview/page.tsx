@@ -168,6 +168,17 @@ export default async function PostcardPreviewPage({ params }: { params: { id: st
       <footer className="border-t py-8">
         <div className="container text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Emerald Coast Marketing Wave. Serving Niceville, Navarre, and Gulf Breeze.</p>
+          <p className="mt-2">
+            A project by{" "}
+            <a
+              href="https://christopherjbradley.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-600 hover:text-emerald-500 hover:underline"
+            >
+              Christopher J. Bradley
+            </a>
+          </p>
         </div>
       </footer>
     </div>

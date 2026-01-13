@@ -69,6 +69,17 @@ export default async function MailingsPage() {
           <p>
             &copy; 2026 Emerald Coast Marketing Wave. Serving Niceville, Navarre, and Gulf Breeze.
           </p>
+          <p className="mt-2">
+            A project by{" "}
+            <a
+              href="https://christopherjbradley.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-600 hover:text-emerald-500 hover:underline"
+            >
+              Christopher J. Bradley
+            </a>
+          </p>
         </div>
       </footer>
     </div>

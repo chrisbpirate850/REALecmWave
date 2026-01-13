@@ -623,6 +623,17 @@ export default function EDDMResourcesPage() {
           <p className="mt-6 text-xs text-slate-500">
             &copy; {new Date().getFullYear()} Emerald Coast Marketing Wave. All rights reserved.
           </p>
+          <p className="mt-4 text-xs text-slate-500">
+            A project by{" "}
+            <a
+              href="https://christopherjbradley.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-400 hover:text-emerald-300 hover:underline"
+            >
+              Christopher J. Bradley
+            </a>
+          </p>
         </div>
       </footer>
     </div>
