@@ -3,7 +3,12 @@
     "allow": [
       "Bash(node scripts/migrate-analytics.mjs:*)",
       "Bash(npm run build:*)",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "Bash(node -e \"\nconst { Client } = require\\(''pg''\\);\nconst fs = require\\(''fs''\\);\n\nconst client = new Client\\({\n  connectionString: ''postgres://postgres.axqqicapljbxqymosdfe:6641Longview!@aws-1-us-east-1.pooler.supabase.com:5432/postgres'',\n  ssl: { rejectUnauthorized: false }\n}\\);\n\nasync function run\\(\\) {\n  await client.connect\\(\\);\n  console.log\\(''Connected to database''\\);\n  \n  const sql = fs.readFileSync\\(''scripts/007_create_blog_posts.sql'', ''utf8''\\);\n  \n  try {\n    await client.query\\(sql\\);\n    console.log\\(''Migration completed successfully!''\\);\n  } catch \\(err\\) {\n    console.error\\(''Migration error:'', err.message\\);\n  } finally {\n    await client.end\\(\\);\n  }\n}\n\nrun\\(\\);\n\")",
+      "Bash(node:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)"
     ]
   }
 }

@@ -13,6 +13,7 @@ import {
   Home,
   Settings,
   LogOut,
+  Link as LinkIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/admin/mailings", label: "Mailings", icon: Mail },
   { href: "/admin/spots", label: "Ad Spots", icon: Grid3X3 },
   { href: "/admin/payments", label: "Payments", icon: CreditCard },
+  { href: "/admin/custom-checkout", label: "Custom Checkout", icon: LinkIcon },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/blog", label: "Blog", icon: FileText },
 ]
