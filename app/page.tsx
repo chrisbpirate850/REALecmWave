@@ -25,6 +25,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 import { createClient } from "@/lib/supabase/server"
 import { LandingPostcardPreview } from "@/components/landing-postcard-preview"
 import { cn } from "@/lib/utils"
@@ -510,41 +511,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t bg-slate-900 py-12 text-slate-300">
-        <div className="container text-center">
-          <div className="flex items-center justify-center gap-2">
-            <Mail className="h-6 w-6 text-emerald-500" />
-            <span className="text-lg font-bold text-white">Emerald Coast Marketing Wave</span>
-          </div>
-          <p className="mt-4 text-sm">
-            Serving Niceville, Navarre, and Gulf Breeze
-          </p>
-          <p className="mt-4 text-sm">
-            Questions?{" "}
-            <a
-              href="mailto:chris@libertysprinciples.com"
-              className="text-emerald-400 hover:text-emerald-300 hover:underline"
-            >
-              chris@libertysprinciples.com
-            </a>
-          </p>
-          <p className="mt-6 text-xs text-slate-500">
-            &copy; {new Date().getFullYear()} Emerald Coast Marketing Wave. All rights reserved.
-          </p>
-          <p className="mt-4 text-xs text-slate-500">
-            A project by{" "}
-            <a
-              href="https://christopherjbradley.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-400 hover:text-emerald-300 hover:underline"
-            >
-              Christopher J. Bradley
-            </a>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

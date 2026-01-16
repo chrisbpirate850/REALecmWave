@@ -1,0 +1,14 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ecmwave.com/sitemap.xml
+
+# Disallow admin and auth pages from indexing
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /auth/*
+Disallow: /api/*
+Disallow: /checkout/*
+Disallow: /dashboard/*

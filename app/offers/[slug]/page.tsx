@@ -2,8 +2,10 @@ import { createAdminClient } from "@/lib/supabase/admin"
 import { notFound } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Mail, MapPin, Phone } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Mail, MapPin, Phone, Home } from "lucide-react"
 import { ClaimOfferButton } from "@/components/claim-offer-button"
+import Link from "next/link"
 import type { Metadata } from "next"
 
 type Props = {
@@ -116,11 +118,24 @@ export default async function OfferLandingPage({ params }: Props) {
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-emerald-50 to-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center">
-          <div className="flex items-center gap-2">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Mail className="h-6 w-6 text-emerald-600" />
             <span className="text-xl font-bold">Emerald Coast Marketing Wave</span>
-          </div>
+          </Link>
+          <nav className="flex items-center gap-2">
+            <Link href="/">
+              <Button variant="ghost" size="sm">
+                <Home className="h-4 w-4 mr-2" />
+                Home
+              </Button>
+            </Link>
+            <Link href="/mailings">
+              <Button variant="outline" size="sm">
+                View Mailings
+              </Button>
+            </Link>
+          </nav>
         </div>
       </header>
 
@@ -238,19 +253,14 @@ export default async function OfferLandingPage({ params }: Props) {
       {/* Footer */}
       <footer className="border-t py-8">
         <div className="container text-center text-sm text-muted-foreground">
-          <p>Powered by Emerald Coast Marketing Wave</p>
+          <p>Powered by <Link href="/" className="text-emerald-600 hover:underline">Emerald Coast Marketing Wave</Link></p>
           <p className="mt-1">Connecting local businesses with the Emerald Coast community</p>
-          <p className="mt-3">
-            A project by{" "}
-            <a
-              href="https://christopherjbradley.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 hover:text-emerald-500 hover:underline"
-            >
-              Christopher J. Bradley
-            </a>
-          </p>
+          <div className="mt-4 flex justify-center gap-4">
+            <Link href="/" className="hover:text-emerald-600">Home</Link>
+            <Link href="/mailings" className="hover:text-emerald-600">Mailings</Link>
+            <Link href="/contact" className="hover:text-emerald-600">Contact</Link>
+            <Link href="/privacy" className="hover:text-emerald-600">Privacy</Link>
+          </div>
         </div>
       </footer>
     </div>

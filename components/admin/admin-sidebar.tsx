@@ -14,6 +14,7 @@ import {
   Settings,
   LogOut,
   Link as LinkIcon,
+  Gift,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
@@ -25,6 +26,7 @@ const navItems = [
   { href: "/admin/spots", label: "Ad Spots", icon: Grid3X3 },
   { href: "/admin/payments", label: "Payments", icon: CreditCard },
   { href: "/admin/custom-checkout", label: "Custom Checkout", icon: LinkIcon },
+  { href: "/admin/assign-spot", label: "Assign Free Spot", icon: Gift },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/blog", label: "Blog", icon: FileText },
 ]
