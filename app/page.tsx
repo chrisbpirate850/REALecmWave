@@ -94,7 +94,11 @@ export default async function HomePage() {
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground sm:text-xl">
               Be the only business in your category to reach 5,000 households this quarter.
             </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <p className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <span className="text-lg">🇺🇸</span>
+              <span>100% Veteran Owned  •  Local resident for 10 years</span>
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link href="/mailings">
                 <Button size="lg" className="text-lg">
                   Claim Your Category
