@@ -31,6 +31,11 @@ type Mailing = {
 
 // Map zip codes to SVG file pairs (front, back)
 const ZIP_CODE_TO_SVG: Record<string, { front: string; back: string; name: string }> = {
+  "32536": {
+    front: "/9x12postcard/Crestview Side A.svg",
+    back: "/9x12postcard/Crestview Side B.svg",
+    name: "Crestview"
+  },
   "32566": {
     front: "/9x12postcard/Navarre Side A.svg",
     back: "/9x12postcard/Navarre Side B.svg",

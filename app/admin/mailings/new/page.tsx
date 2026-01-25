@@ -12,6 +12,7 @@ import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 
 const ZIP_OPTIONS = [
+  { value: "32536", label: "32536 - Crestview" },
   { value: "32566", label: "32566 - Navarre" },
   { value: "32578", label: "32578 - Niceville" },
   { value: "32561", label: "32561 - Gulf Breeze" },
