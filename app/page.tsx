@@ -96,7 +96,7 @@ export default async function HomePage() {
             </p>
             <div className="mt-4 flex items-center justify-center">
               <img
-                src="/100%25 U.S. Army Combat Veteran Owned.png"
+                src="/veteran-owned-badge.png"
                 alt=""
                 width={100}
                 height={100}
