@@ -40,8 +40,8 @@ async function addCrestviewMailing() {
     .from('mailings')
     .insert({
       id: mailingId,
-      title: 'January 2026 - Crestview',
-      scheduled_mail_date: '2026-01-25',
+      title: 'February 2026 - Crestview',
+      scheduled_mail_date: '2026-02-07',
       zip_codes: ['32536'],
       estimated_recipients: 5000,
       status: 'active',

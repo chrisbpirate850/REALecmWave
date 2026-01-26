@@ -26,10 +26,10 @@ interface PurchaseConfirmationEmailProps {
 
 export default function PurchaseConfirmationEmail({
   businessName = "Your Business",
-  mailingTitle = "January 2025 Mailing",
+  mailingTitle = "February 2026 Mailing",
   spotCount = 1,
   totalAmount = 675,
-  mailDate = "January 15, 2025",
+  mailDate = "February 7, 2026",
   zipCodes = ["32578", "32541"],
   estimatedReach = 5000,
   dashboardUrl = "https://ecmwave.com/dashboard",

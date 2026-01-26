@@ -27,7 +27,7 @@ async function runMigration() {
   const { error: updateError } = await supabase
     .from('mailings')
     .update({
-      title: 'January 2026 - Niceville',
+      title: 'February 2026 - Niceville',
       zip_codes: ['32578']
     })
     .eq('id', 'a0000000-0000-0000-0000-000000000001')
@@ -44,8 +44,8 @@ async function runMigration() {
     .from('mailings')
     .upsert({
       id: 'a0000000-0000-0000-0000-000000000002',
-      title: 'January 2026 - Navarre',
-      scheduled_mail_date: '2026-01-25',
+      title: 'February 2026 - Navarre',
+      scheduled_mail_date: '2026-02-07',
       zip_codes: ['32566'],
       estimated_recipients: 5000,
       status: 'active',
@@ -94,8 +94,8 @@ async function runMigration() {
     .from('mailings')
     .upsert({
       id: 'a0000000-0000-0000-0000-000000000003',
-      title: 'January 2026 - Gulf Breeze',
-      scheduled_mail_date: '2026-01-25',
+      title: 'February 2026 - Gulf Breeze',
+      scheduled_mail_date: '2026-02-07',
       zip_codes: ['32561'],
       estimated_recipients: 5000,
       status: 'active',

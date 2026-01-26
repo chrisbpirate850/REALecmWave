@@ -4,7 +4,7 @@
 -- First, update the existing mailing to be Niceville only
 UPDATE public.mailings
 SET
-  title = 'January 2026 - Niceville',
+  title = 'February 2026 - Niceville',
   zip_codes = ARRAY['32578']
 WHERE id = 'a0000000-0000-0000-0000-000000000001';
 
@@ -19,8 +19,8 @@ INSERT INTO public.mailings (
   price_per_spot
 ) VALUES (
   'a0000000-0000-0000-0000-000000000002',
-  'January 2026 - Navarre',
-  '2026-01-25',
+  'February 2026 - Navarre',
+  '2026-02-07',
   ARRAY['32566'],
   5000,
   'active',
@@ -53,8 +53,8 @@ INSERT INTO public.mailings (
   price_per_spot
 ) VALUES (
   'a0000000-0000-0000-0000-000000000003',
-  'January 2026 - Gulf Breeze',
-  '2026-01-25',
+  'February 2026 - Gulf Breeze',
+  '2026-02-07',
   ARRAY['32561'],
   5000,
   'active',

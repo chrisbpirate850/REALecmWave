@@ -11,8 +11,8 @@ INSERT INTO public.mailings (
   price_per_spot
 ) VALUES (
   'a0000000-0000-0000-0000-000000000004',
-  'January 2026 - Crestview',
-  '2026-01-25',
+  'February 2026 - Crestview',
+  '2026-02-07',
   ARRAY['32536'],
   5000,
   'active',

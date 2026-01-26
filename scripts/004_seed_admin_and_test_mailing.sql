@@ -13,8 +13,8 @@ INSERT INTO public.mailings (
   price_per_spot
 ) VALUES (
   'a0000000-0000-0000-0000-000000000001',
-  'January 2026 - Niceville',
-  '2026-01-25',
+  'February 2026 - Niceville',
+  '2026-02-07',
   ARRAY['32578'],
   5000,
   'active',
