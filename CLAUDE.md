@@ -18,6 +18,8 @@ npm start            # Run production build locally
 npm run lint         # Lint code
 ```
 
+No test runner is configured. There are no test files or test scripts.
+
 ### Stripe Webhook Testing
 ```bash
 # In separate terminal - forward webhooks locally
@@ -25,20 +27,28 @@ stripe listen --forward-to localhost:3000/api/webhooks/stripe
 ```
 
 ### Database Migrations
-SQL migration files are in `scripts/`. Run migrations using the `.mjs` runner scripts:
+Numbered SQL migration files in `scripts/` (e.g., `001_create_tables.sql` through `008_add_crestview_mailing.sql`). Run migrations using the corresponding `.mjs` runner scripts:
 ```bash
 node scripts/run-sql-migration.mjs
 ```
+Additional utility scripts exist for tasks like resetting spots, updating QR URLs, and creating landing pages.
 
 ## Architecture
 
 ### Tech Stack
 - **Framework**: Next.js 16 with App Router and React 19
 - **Database/Auth**: Supabase (PostgreSQL with Row Level Security)
-- **Payments**: Stripe (live mode - checkout sessions + webhooks)
-- **Email**: Resend with React Email templates
+- **Payments**: Stripe (live mode - embedded checkout + webhooks)
+- **Email**: Resend with React Email templates (`emails/` directory: purchase confirmation, welcome, contact form)
 - **Styling**: Tailwind CSS 4 with shadcn/ui (new-york style)
-- **Deployment**: Vercel
+- **Deployment**: Vercel (auto-deploys on push to `main` at `github.com:chrisbpirate850/REALecmWave.git`)
+
+### Middleware
+
+The middleware file is `proxy.ts` at the project root (not the standard `middleware.ts`). It delegates to `lib/supabase/proxy.ts` which:
+- Refreshes Supabase auth sessions on every request
+- Redirects unauthenticated users away from `/admin/*` and `/dashboard/*` to `/auth/login`
+- Excludes static assets from middleware via the matcher pattern
 
 ### Supabase Client Patterns
 
@@ -46,22 +56,25 @@ Three Supabase clients for different contexts:
 
 | Client | Location | Usage |
 |--------|----------|-------|
-| `createClient()` | `@/lib/supabase/client` | Browser/client components |
-| `createClient()` | `@/lib/supabase/server` | Server components (uses cookies, respects RLS) |
+| `createClient()` | `@/lib/supabase/client` | Browser/client components (sync) |
+| `createClient()` | `@/lib/supabase/server` | Server components (async, uses cookies, respects RLS) |
 | `createAdminClient()` | `@/lib/supabase/admin` | Webhooks/server actions (bypasses RLS with service role key) |
 
 **Important**: Server client is async (`await createClient()`), browser client is sync.
 
 ### Payment Flow
 
+Stripe uses **embedded checkout** (`ui_mode: "embedded"`) — the checkout form renders inline, not via redirect.
+
 1. User selects spots on `/mailings/[id]`
-2. `POST /api/checkout` creates Stripe session, marks spots as "reserved"
-3. Stripe redirects to `/checkout/success` on completion
-4. `/api/webhooks/stripe` receives `checkout.session.completed`:
+2. Server action `app/actions/stripe.ts` creates embedded Stripe session, marks spots as "reserved", creates pending payment records
+3. On completion, `/api/webhooks/stripe` receives `checkout.session.completed`:
    - Updates spots to "purchased"
    - Creates landing pages with unique slugs
    - Generates QR code URLs
    - Sends confirmation email via Resend
+
+Spot metadata (spotIds, mailingId, advertiserId, adCopyUrl, offerText) is passed through Stripe session metadata.
 
 ### Key Database Columns
 
@@ -80,6 +93,17 @@ UPDATE profiles SET is_admin = true WHERE email = 'user@example.com';
 
 Admins generate payment links with negotiated pricing at `/admin/custom-checkout`. The flow uses `/api/custom-checkout` to create Stripe sessions with custom amounts.
 
+### API Routes
+
+All API routes are in `app/api/`:
+- `checkout/` and `custom-checkout/` - Payment session creation
+- `webhooks/stripe/` - Stripe event handler (uses admin client to bypass RLS)
+- `admin-upload/` and `upload-ad-copy/` - File uploads
+- `assign-spot/` - Manual spot assignment
+- `claim-offer/` - Offer landing page claims
+- `contact/` - Contact form submission
+- `emails/send/` - Email trigger endpoint
+
 ## Styling
 
 ### Theme Colors (OKLCH)
@@ -89,7 +113,7 @@ Defined in `app/globals.css`:
 - Full dark mode support
 
 ### Custom Animations
-Wave animations defined in globals.css: `.animate-wave-slow`, `.animate-wave-medium`, `.animate-wave-fast`
+Wave animations defined in globals.css: `.animate-wave-slow`, `.animate-wave-medium`, `.animate-wave-fast`. All respect `prefers-reduced-motion`.
 
 ## Environment Variables
 
@@ -111,8 +135,8 @@ Wave animations defined in globals.css: `.animate-wave-slow`, `.animate-wave-med
 
 ## Important Notes
 
-- `next.config.mjs` has `typescript.ignoreBuildErrors: true` - address type errors when possible
-- Email templates use React Email in `emails/` directory
-- Project console logs use `[v0]` prefix (generated with v0.dev)
+- `next.config.mjs` has `typescript.ignoreBuildErrors: true` — address type errors when possible
+- Project was generated with v0.dev; console logs use `[v0]` prefix
 - Print export at `/admin/mailings/[id]/export` uses JSZip for artwork ZIP downloads
 - Path alias: `@/*` maps to `./*` (e.g., `@/components`, `@/lib`)
+- `images.unoptimized: true` in next.config — Next.js image optimization is disabled
